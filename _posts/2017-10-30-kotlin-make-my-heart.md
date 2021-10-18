@@ -12,7 +12,7 @@ categories: 编程
 
 ## Hello world!
 
-```java
+```kotlin
 fun main() { // 1
     println("Hello world!") // 2
 }
@@ -34,7 +34,7 @@ fun main() { // 1
 
 ## 文档注释支持Markdown
 
-```java
+```kotlin
 /**
  * 这是`文档注释`，它支持 **Markdown**。
  */
@@ -47,7 +47,7 @@ fun main() {
 
 `var`定义可变变量，`val`定义只读变量，初始化后不能再次被赋值。
 
-```java
+```kotlin
 fun main() {
     var age: Int = 27
     val name: String = "Belin Wu"
@@ -58,7 +58,7 @@ fun main() {
 
 可以不写类型，编译器会自动推导。
 
-```java
+```kotlin
 fun main() {
     var age = 27 // age is Int
     val name = "Belin Wu" // name is String
@@ -69,7 +69,7 @@ fun main() {
 
 字符串里可以直接嵌套变量或表达式。
 
-```java
+```kotlin
 fun main() {
     val name = "Kotlin"
     println("The length of $name is ${name.length}") // The length of Kotlin is 6
@@ -80,7 +80,7 @@ fun main() {
 
 用三引号`"""`定义的字符串里可以包含任意字符，不需要转义。
 
-```java
+```kotlin
 fun main() {
     val text = """
     for (c in "foo")
@@ -94,7 +94,7 @@ fun main() {
 
 直接调用构造函数就可以创建实例。
 
-```java
+```kotlin
 fun main() {
     val version = KotlinVersion(1, 1, 51)
 }
@@ -104,7 +104,7 @@ fun main() {
 
 不用定义`setter`和`getter`方法。
 
-```java
+```kotlin
 class User(var name: String)
 
 fun main() {
@@ -118,7 +118,7 @@ fun main() {
 
 对象声明将类的声明和实例创建结合了起来，一步到位。`Singleton`同时也是一个单例。
 
-```java
+```kotlin
 object Singleton
 
 fun main() {
@@ -131,7 +131,7 @@ fun main() {
 
 判断对象是不是某个类型用`is`；判断对象不是某个类型用`!is`
 
-```java
+```kotlin
 fun main() {
     val obj: Any = "Kotlin"
     println(obj is String) // true
@@ -141,7 +141,7 @@ fun main() {
 
 确定对象是期望的类型后就可以直接调用它的属性或成员函数，不需要强制类型转换。
 
-```java
+```kotlin
 fun main() {
     val obj: Any = "Kotlin"
     if (obj is String) {
@@ -154,7 +154,7 @@ fun main() {
 
 为已有类型定义别名有缩短类型名称、让名字更符合使用场景、简化范型或函数类型等好处。
 
-```java
+```kotlin
 typealias Age = Byte
 typealias Hobby = Set<String>
 typealias Predicate<T> = (T) -> Boolean
@@ -170,7 +170,7 @@ typealias UrlBuilder = Url.Builder
 
 Kotlin 类型分为：可空类型、不可空类型。`null`只允许将赋值给可空类型，否则会出现编译错误。
 
-```java
+```kotlin
 fun main() {
     val str: String? = null
     val error: String = null // compile error
@@ -181,7 +181,7 @@ fun main() {
 
 调用可空类型的属性或成员函数有一种安全的操作符：`?.`，当调用者是`null`时，调用结果也为`null`。当在多个可空类型上做级联调用时可以省去嵌套`if`判断，代码更加简洁。
 
-```java
+```kotlin
 fun main() {
     val str: String? = null
     str?.length?.toString()?.length / / null
@@ -192,7 +192,7 @@ fun main() {
 
 有默认值的函数可以减少重载、困惑。
 
-```java
+```kotlin
 fun joinToString(array: Array<String>, separator: String = ", "): String {
     return array.joinToString(separator)
 }
@@ -207,7 +207,7 @@ fun main() {
 
 当使用`data class`定义数据类时，编译器会自动生成`toString()`，`equals()`，`hashCode()`，`copy()`等成员函数的字节码。
 
-```java
+```kotlin
 data class User(val name: String, var age: Int)
 
 fun main() {
@@ -223,7 +223,7 @@ fun main() {
 
 将对象解构可以一次性声明并初始化多个变量。
 
-```java
+```kotlin
 data class User(var name: String, var age: Int = 1)
 
 fun main() {
@@ -237,7 +237,7 @@ fun main() {
 
 使用解构声明可以实现返回多值的函数。
 
-```java
+```kotlin
 fun main() {
     val (father, mother) = getParent()
     println(father.name)
@@ -257,7 +257,7 @@ class Person(var name: String)
 
 要一定是数据类吗？并不是，按照约定，在类中有定义N个`componentN`方法即可。
 
-```java
+```kotlin
 class MyPair<out A, out B>(val a: A, val b: B) {
     operator fun component1() = a
 

@@ -440,7 +440,7 @@ public class Adapter extends RecyclerView.Adapter<ViewHolder> {
 
 Kotlin 语言有 delegation 机制，可以方便开发者使用组合。
 
- ```kotlin
+```kotlin
 interface Base {
     fun print()
 }
