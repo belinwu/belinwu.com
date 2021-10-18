@@ -22,12 +22,12 @@ Software Engineer at [RingCentral](https://www.ringcentral.com).
  
 ## 生涯
  
-- 2020.3~至今：&nbsp;&nbsp;&nbsp;&nbsp;铃盛(RingCentral)，Android工程师
-- 2019.3~2020.2：美柚，Android工程师
-- 2017.6~2019.2：美图，Android工程师
-- 2015.4~2017.5：四三九九，Android工程师
-- 2013.7~2015.4：顶点软件，Java Web工程师
-- 2009.9~2013.7：集美大学，网络工程*(本科)*
+- 2020.3&nbsp;~&nbsp;&nbsp;Today：铃盛(RingCentral)，Android工程师
+- 2019.3&nbsp;~&nbsp;2020.2：美柚，Android工程师
+- 2017.6&nbsp;~&nbsp;2019.2：美图，Android工程师
+- 2015.4&nbsp;~&nbsp;2017.5：四三九九，Android工程师
+- 2013.7&nbsp;~&nbsp;2015.4：顶点软件，Java Web工程师
+- 2009.9&nbsp;~&nbsp;2013.7：集美大学，网络工程*(本科)*
  
 ## 足迹
  
