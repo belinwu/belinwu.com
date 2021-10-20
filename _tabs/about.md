@@ -4,14 +4,14 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-Software Engineer at [RingCentral](https://www.ringcentral.com).
+Pragmatic Android Engineer
 
 ## 简介
  
 - 网名：吴上阿吉
 - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID：belinwu
 - 职业：Android工程师
-- 领域：移动应用设计与开发
+- 领域：Kotlin Multiplatform应用设计与开发
  
 ## 标签
  

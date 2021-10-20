@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
 `ViewModel` 的生命周期与 UI 组件的生命周期相关联，如下图所示：
 
-![ViewModel 生命周期（来自官网）](https://upload-images.jianshu.io/upload_images/4170300-7dbf535abad455c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![ViewModel 生命周期（来自官网）](/assets/img/viewmodel-lifecycle.png)
 
 当 `Activity` 被系统重建时，`ViewModel` 对象不会被销毁，新的 `Activity` 对象拿到的是同一个 `ViewModel` 对象。可以很方便的使用 `ViewModel` 里的 UI 数据将之前的 UI 状态呈现给用户。比如上面的例子，呈现页面加载状态。
 
