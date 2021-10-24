@@ -1,0 +1,721 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="day-prompt" content="days ago"><meta name="hour-prompt" content="hours ago"><meta name="minute-prompt" content="minutes ago"><meta name="justnow-prompt" content="just now"><meta name="generator" content="Jekyll v4.2.1" /><meta property="og:title" content="组合优于继承" /><meta property="og:locale" content="en" /><meta name="description" content="《Effective Java 中文版第2版》书中第16条中说到：" /><meta property="og:description" content="《Effective Java 中文版第2版》书中第16条中说到：" /><link rel="canonical" href="https://belinwu.com/posts/composition-over-inheritance/" /><meta property="og:url" content="https://belinwu.com/posts/composition-over-inheritance/" /><meta property="og:site_name" content="Belin Wu" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2018-07-11T09:51:00+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="组合优于继承" /><meta name="twitter:site" content="@belin_wu" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"description":"《Effective Java 中文版第2版》书中第16条中说到：","url":"https://belinwu.com/posts/composition-over-inheritance/","headline":"组合优于继承","@type":"BlogPosting","dateModified":"2021-10-18T11:22:46+00:00","datePublished":"2018-07-11T09:51:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://belinwu.com/posts/composition-over-inheritance/"},"@context":"https://schema.org"}</script><title>组合优于继承 | Belin Wu</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Belin Wu"><meta name="application-name" content="Belin Wu"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang="en"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Belin Wu</a></div><div class="site-subtitle font-italic">Pragmatic Android Developer</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <a href="https://github.com/belinwu" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/belin_wu" aria-label="twitter" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['belinwu','qq.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6" > <i class="fas fa-rss"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>组合优于继承</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>组合优于继承</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> Belin Wu </span> on <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Wed, Jul 11, 2018, 9:51 AM +0000" >Jul 11, 2018<i class="unloaded">2018-07-11T09:51:00+00:00</i> </span></div><div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Mon, Oct 18, 2021, 7:22 PM +0800" >Oct 18<i class="unloaded">2021-10-18T11:22:46+00:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2730 words">15 min read</span></div></div><div class="post-content"><p>《Effective Java 中文版第2版》书中第16条中说到：</p><blockquote><p>继承是实现代码复用的有力手段，但它并非永远是完成这项工作的的最佳工具。</p></blockquote><h2 id="继承有什么问题">继承有什么问题？</h2><p>继承打破了类的封装性，子类依赖于父类中特定功能的实现细节。</p><h2 id="继承什么时候是安全的">继承什么时候是安全的</h2><ul><li>在包的内部是用继承，不存在跨包继承。<li>专门为了扩展而设计，并且具备很好的文档说明。</ul><h2 id="一个例子">一个例子</h2><p>实现这样一个<code class="language-plaintext highlighter-rouge">HashSet</code>，可以跟踪从它被创建之后曾经添加过几个元素。</p><h3 id="使用继承实现">使用继承实现</h3><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedSet</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="c1">// The number of attempted element insertions</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">InstrumentedSet</span><span class="o">()</span> <span class="o">{</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nf">InstrumentedSet</span><span class="o">(</span><span class="kt">int</span> <span class="n">initCap</span><span class="o">,</span> <span class="kt">float</span> <span class="n">loadFactor</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">initCap</span><span class="o">,</span> <span class="n">loadFactor</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">addCount</span><span class="o">++;</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>类中使用 <code class="language-plaintext highlighter-rouge">addCount</code> 字段记录添加元素的次数，并覆盖父类的 <code class="language-plaintext highlighter-rouge">add()</code>和 <code class="language-plaintext highlighter-rouge">addAll()</code> 实现，对 <code class="language-plaintext highlighter-rouge">addCount</code> 字段进行设值。</p><p>在下面的程序中，我们期望 <code class="language-plaintext highlighter-rouge">getAddCount()</code> 返回3，但实际上返回的是6。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="nc">InstrumentedSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">InstrumentedSet</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;();</span>
+<span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Snap"</span><span class="o">,</span> <span class="s">"Crackle"</span><span class="o">,</span> <span class="s">"Pop"</span><span class="o">));</span>
+</pre></table></code></div></div><p>问题出在于：在 <code class="language-plaintext highlighter-rouge">HashSet</code> 中，<code class="language-plaintext highlighter-rouge">addAll()</code> 的实现是基于 <code class="language-plaintext highlighter-rouge">add()</code> 方法的。子类在扩展父类的功能时，如果不清楚实现细节，是非常危险的，况且父类的实现在未来可能是变化的，毕竟它并不是为扩展而设计的。</p><h3 id="使用组合实现">使用组合实现</h3><p>不用扩展现有的类，而是在新的类中增加一个私有字段，引用现有类的实例。这种设计被叫做<strong>组合</strong>。</p><p>先创建一个干净的 <code class="language-plaintext highlighter-rouge">SetWrapper</code> 组合类。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SetWrapper</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">;</span>
+  <span class="kd">public</span> <span class="nf">SetWrapper</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">;</span> <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clear</span><span class="o">()</span>               <span class="o">{</span> <span class="n">s</span><span class="o">.</span><span class="na">clear</span><span class="o">();</span>            <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">o</span><span class="o">);</span> <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">();</span>   <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>      <span class="o">}</span>
+  <span class="kd">public</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>  <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>      <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">remove</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">){</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>   <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">containsAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">containsAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span> <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>      <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">removeAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">removeAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>   <span class="o">}</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">retainAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">retainAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>   <span class="o">}</span>
+  <span class="kd">public</span> <span class="nc">Object</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">()</span>          <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toArray</span><span class="o">();</span>  <span class="o">}</span>
+  <span class="kd">public</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="no">T</span><span class="o">[]</span> <span class="nf">toArray</span><span class="o">(</span><span class="no">T</span><span class="o">[]</span> <span class="n">a</span><span class="o">)</span>      <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">a</span><span class="o">);</span> <span class="o">}</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o</span><span class="o">);</span>  <span class="o">}</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span>    <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span> <span class="o">}</span>
+  <span class="nd">@Override</span> <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span> <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">SetWrapper</code> 实现了装饰模式，通过引用 <code class="language-plaintext highlighter-rouge">Set&lt;E&gt;</code> 类型的字段，面向接口编程，相比直接继承 <code class="language-plaintext highlighter-rouge">HashSet</code> 类来得更灵活。可以在调用该类的构造方法中传入任意 <code class="language-plaintext highlighter-rouge">Set</code> 具体类。扩展该类以实现需求。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">InstrumentedSet</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">SetWrapper</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="kt">int</span> <span class="n">addCount</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">InstrumentedSet</span><span class="o">(</span><span class="nc">Set</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">addCount</span><span class="o">++;</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">addAll</span><span class="o">(</span><span class="nc">Collection</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">E</span><span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">addCount</span> <span class="o">+=</span> <span class="n">c</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">c</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getAddCount</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">addCount</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="举一反三">举一反三</h2><p><strong>注：以下代码均是伪代码，组合方式的实现封装成 Android 库并已开源，名叫 <a href="https://github.com/samelody/modapter">Modapter</a>（ Modular Adapter 之意）。没错，这里打了个广告。</strong></p><p>先来看看问题。笔者曾开发的某个应用有以下2张截图：</p><p><img data-proofer-ignore data-src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/11/15/1671506a97e8bc39~tplv-t2oaga2asx-image.image" alt="游戏详情页面" /></p><p><img data-proofer-ignore data-src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/11/15/1671506a97fec3a8~tplv-t2oaga2asx-image.image" alt="评论列表页面" /></p><p>详情页面和评论列表页面均复用了评论项的实现。</p><p>评论列表页面的 <code class="language-plaintext highlighter-rouge">GameComentsAdapter</code>。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameCommentsAdapter</span> <span class="kd">extends</span> <span class="nc">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="nc">BaseViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ITEM_TYPE_COMMENT</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">mDataSet</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemViewType</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Object</span> <span class="n">item</span> <span class="o">=</span> <span class="n">getItem</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="k">instanceof</span> <span class="nc">Comment</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="no">ITEM_TYPE_COMMENT</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getItemViewType</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="nc">Object</span> <span class="nf">getItem</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mDataSet</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@NonNull</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">BaseViewHolder</span> <span class="nf">onCreateViewHolder</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">ViewGroup</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">viewType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">LayoutInflater</span> <span class="n">inflater</span> <span class="o">=</span> <span class="nc">LayoutInflater</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">getContext</span><span class="o">());</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">viewType</span> <span class="o">==</span> <span class="no">ITEM_TYPE_COMMENT</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">View</span> <span class="n">itemView</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">item_comment</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">CommentViewHolder</span><span class="o">(</span><span class="n">itemView</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemCount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mDataSet</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h3 id="if-else-方式实现">if-else 方式实现</h3><p>修改 <code class="language-plaintext highlighter-rouge">GameComentsAdapter</code> 类，增加对游戏详情项的适配支持。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">GameCommentsAdapter</span> <span class="kd">extends</span> <span class="nc">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="nc">BaseViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ITEM_TYPE_COMMENT</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ITEM_TYPE_GAME_DETAIL</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">mDataSet</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemViewType</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Object</span> <span class="n">item</span> <span class="o">=</span> <span class="n">getItem</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="k">instanceof</span> <span class="nc">Comment</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="no">ITEM_TYPE_COMMENT</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="k">instanceof</span> <span class="nc">GameDetail</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="no">ITEM_TYPE_GAME_DETAIL</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getItemViewType</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">protected</span> <span class="nc">Object</span> <span class="nf">getItem</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mDataSet</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@NonNull</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">BaseViewHolder</span> <span class="nf">onCreateViewHolder</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">ViewGroup</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">viewType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">LayoutInflater</span> <span class="n">inflater</span> <span class="o">=</span> <span class="nc">LayoutInflater</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">getContext</span><span class="o">());</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">viewType</span> <span class="o">==</span> <span class="no">ITEM_TYPE_COMMENT</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">View</span> <span class="n">itemView</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">item_comment</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">CommentViewHolder</span><span class="o">(</span><span class="n">itemView</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">viewType</span> <span class="o">==</span> <span class="no">ITEM_TYPE_GAME_DETAIL</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">View</span> <span class="n">itemView</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">item_game_detail</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">GameDetailViewHolder</span><span class="o">(</span><span class="n">itemView</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemCount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">mDataSet</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>在游戏详情页面为 <code class="language-plaintext highlighter-rouge">RecyclerView</code> 创建一个 <code class="language-plaintext highlighter-rouge">GameCommentsAdapter </code> 对象。但该方式会让 <code class="language-plaintext highlighter-rouge">GameCommentsAdapter</code> 变得臃肿，也不满足OCP开闭原则。</p><h3 id="继承方式实现">继承方式实现</h3><p>扩展一个 <code class="language-plaintext highlighter-rouge">Adapter</code> 至少要实现 <code class="language-plaintext highlighter-rouge">getItemViewType()</code>、<code class="language-plaintext highlighter-rouge">onCreateViewHolder()</code> 等方法，为了复用 <code class="language-plaintext highlighter-rouge">GameComentsAdapter</code> 类中对评论项，详情页面的 <code class="language-plaintext highlighter-rouge">GameDetailAdapter</code> 继承该类。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">GameDetailAdapter</span> <span class="kd">extends</span> <span class="nc">GameCommentsAdapter</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="no">ITEM_TYPE_GAME_DETAIL</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemViewType</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Object</span> <span class="n">item</span> <span class="o">=</span> <span class="n">getItem</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="k">instanceof</span> <span class="nc">GameDetail</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="no">ITEM_TYPE_GAME_DETAIL</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getItemViewType</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@NonNull</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">BaseViewHolder</span> <span class="nf">onCreateViewHolder</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">ViewGroup</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">viewType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">viewType</span> <span class="o">==</span> <span class="no">ITEM_TYPE_GAME_DETAIL</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">LayoutInflater</span> <span class="n">inflater</span> <span class="o">=</span> <span class="nc">LayoutInflater</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">getContext</span><span class="o">());</span>
+            <span class="nc">View</span> <span class="n">itemView</span> <span class="o">=</span> <span class="n">inflater</span><span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">item_game_detail</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">GameDetailViewHolder</span><span class="o">(</span><span class="n">itemView</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">onCreateViewHolder</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">viewType</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h3 id="突然来了一个新需求">突然来了一个新需求</h3><p>产品希望在详情页面添加推荐项，复用首页列表项，如下图所示：</p><p><img data-proofer-ignore data-src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/11/15/1671506a98deb975~tplv-t2oaga2asx-image.image" alt="首页" /></p><p>实现效果如下图所示：</p><p><img data-proofer-ignore data-src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/11/15/1671506a99103e93~tplv-t2oaga2asx-image.image" alt="详情页面增加" /></p><p>Java 是单继承的，<code class="language-plaintext highlighter-rouge">GameDetailAdapter</code> 已经继承了 <code class="language-plaintext highlighter-rouge">GameComentsAdapter</code> 类了，无法再继承 <code class="language-plaintext highlighter-rouge">HomeAdapter</code>。</p><p>难道继续在 <code class="language-plaintext highlighter-rouge">GameComentsAdapter</code> 类中增加 <code class="language-plaintext highlighter-rouge">if</code> 判断？</p><h3 id="组合方式">组合方式</h3><p><em>为了方便阅读，部分代码已省略。</em></p><p>定义一个模块化的适配器 <code class="language-plaintext highlighter-rouge">Adapter</code> 类，为了能够被以上 <code class="language-plaintext highlighter-rouge">Adapter</code> 类所管理，数据项和视图项需要做一些配合：前者继承 <code class="language-plaintext highlighter-rouge">AbstractItem</code> 类，后者需要继承 <code class="language-plaintext highlighter-rouge">ItemViewHolder</code> 类。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Comment</span> <span class="kd">extends</span> <span class="nc">AbstractItem</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">GameDetail</span> <span class="kd">extends</span> <span class="nc">AbstractItem</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">Game</span> <span class="kd">extends</span> <span class="nc">AbstractItem</span> <span class="o">{}</span>
+
+<span class="kd">class</span> <span class="nc">CommentViewHolder</span> <span class="kd">extends</span> <span class="nc">ItemViewHolder</span><span class="o">&lt;</span><span class="nc">Comment</span><span class="o">&gt;</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">GameDetailViewHolder</span> <span class="kd">extends</span> <span class="nc">ItemViewHolder</span><span class="o">&lt;</span><span class="nc">GameDetail</span><span class="o">&gt;</span> <span class="o">{}</span>
+<span class="kd">class</span> <span class="nc">GameViewHolder</span> <span class="kd">extends</span> <span class="nc">ItemViewHolder</span><span class="o">&lt;</span><span class="nc">Game</span><span class="o">&gt;</span> <span class="o">{}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">AbstractItem</code> 类定义了一个 <code class="language-plaintext highlighter-rouge">type</code> 属性，代表数据项的类型，会与通过注册的数据项配置信息进行比对，当 <code class="language-plaintext highlighter-rouge">type</code> 属性值一样时，就会为该数据项 <code class="language-plaintext highlighter-rouge">AbstractItem</code> 创建对应的视图项 <code class="language-plaintext highlighter-rouge">ViewHolder</code>。</p><p>如果因为 Java 单继承的关系无法继承 <code class="language-plaintext highlighter-rouge">AbstractItem</code> 类，可以选择实现 <code class="language-plaintext highlighter-rouge">Item</code> 接口，实现以下方法。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Item</span> <span class="o">{</span>
+
+    <span class="kt">void</span> <span class="nf">setType</span><span class="o">(</span><span class="kt">int</span> <span class="n">type</span><span class="o">);</span>
+
+    <span class="kt">int</span> <span class="nf">getType</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>此时，数据项和视图项的准备工作已完成，接下来可以组合它们实现需求。</p><p>在评论列表页面，创建一个 <code class="language-plaintext highlighter-rouge">Adapter</code> 实例，并添加评论项功能。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="n">dataSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">dataSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Comment</span><span class="o">());</span>
+<span class="n">dataSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">GameDetail</span><span class="o">());</span>
+
+<span class="nc">Adapter</span> <span class="n">adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Adapter</span><span class="o">();</span>
+<span class="n">adapter</span><span class="o">.</span><span class="na">getManager</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="no">ITEM_TYPE_COMMENT</span><span class="o">,</span> <span class="nc">CommentViewHolder</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="no">ITEM_TYPE_GAME_DETAIL</span><span class="o">,</span> <span class="nc">GameDetailViewHolder</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setList</span><span class="o">(</span><span class="n">dataSet</span><span class="o">);</span>
+</pre></table></code></div></div><p>在游戏详情页面，创建一个 <code class="language-plaintext highlighter-rouge">Adapter</code> 实例，并添加游戏项功能。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">dataSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="n">dataSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Comment</span><span class="o">());</span>
+<span class="n">dataSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">GameDetail</span><span class="o">());</span>
+<span class="n">dataSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Game</span><span class="o">());</span>
+
+<span class="nc">Adapter</span> <span class="n">adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Adapter</span><span class="o">();</span>
+<span class="n">adapter</span><span class="o">.</span><span class="na">getManager</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="no">ITEM_TYPE_COMMENT</span><span class="o">,</span> <span class="nc">CommentViewHolder</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="no">ITEM_TYPE_GAME_DETAIL</span><span class="o">,</span> <span class="nc">GameDetailViewHolder</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="no">ITEM_TYPE_GAME</span><span class="o">,</span> <span class="nc">GameViewHolder</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">setList</span><span class="o">(</span><span class="n">dataSet</span><span class="o">);</span>
+</pre></table></code></div></div><p>当某个页面不再支持评论项时，我们只要删除以下代码即可，不会修改到其他地方，满足OCP设计原则。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="n">dataSet</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Comment</span><span class="o">());</span>
+<span class="n">adapter</span><span class="o">.</span><span class="na">getManager</span><span class="o">().</span><span class="na">unregister</span><span class="o">(</span><span class="no">ITEM_TYPE_COMMENT</span><span class="o">);</span>
+</pre></table></code></div></div><h4 id="实现原理">实现原理</h4><p>引入 <code class="language-plaintext highlighter-rouge">ItemManager</code> 接口，统一管理项数据、注册和注销视图项配置信息。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ItemManager</span> <span class="o">{</span>
+
+    <span class="nc">ItemManager</span> <span class="nf">setList</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="nc">Item</span><span class="o">&gt;</span> <span class="n">list</span><span class="o">);</span>
+
+    <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">ViewHolder</span><span class="o">&gt;</span> <span class="nc">ItemManager</span> <span class="nf">register</span><span class="o">(</span><span class="kt">int</span> <span class="n">type</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">holderClass</span><span class="o">);</span>
+
+    <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">ViewHolder</span><span class="o">&gt;</span> <span class="nc">ItemManager</span> <span class="nf">register</span><span class="o">(</span><span class="kt">int</span> <span class="n">type</span><span class="o">,</span> <span class="nd">@LayoutRes</span> <span class="kt">int</span> <span class="n">layoutId</span><span class="o">,</span> <span class="nc">Class</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">holderClass</span><span class="o">);</span>
+    
+    <span class="nc">ItemManager</span> <span class="nf">register</span><span class="o">(</span><span class="nc">ItemConfig</span> <span class="n">config</span><span class="o">);</span>
+
+    <span class="nc">ItemManager</span> <span class="nf">unregister</span><span class="o">(</span><span class="kt">int</span> <span class="n">type</span><span class="o">);</span>
+    
+    <span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Item</span><span class="o">&gt;</span> <span class="no">T</span> <span class="nf">getItem</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>该接口的实现类是 <code class="language-plaintext highlighter-rouge">AdapterDelegate</code>，主要实现了<code class="language-plaintext highlighter-rouge">getItemViewType</code>，<code class="language-plaintext highlighter-rouge">onCreateViewHolder</code>, <code class="language-plaintext highlighter-rouge">onBindViewHolder</code> 三个 <code class="language-plaintext highlighter-rouge">if-else</code> 重灾区方法。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">AdapterDelegate</span> <span class="kd">implements</span> <span class="nc">ItemManager</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemViewType</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">getItem</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+        <span class="nc">ItemConfig</span> <span class="n">adapter</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">item</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">adapter</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">getType</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">adapter</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// TODO</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">adapter</span><span class="o">.</span><span class="na">getType</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">ViewHolder</span> <span class="nf">onCreateViewHolder</span><span class="o">(</span><span class="nc">ViewGroup</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">viewType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ItemConfig</span> <span class="n">adapter</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">viewType</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">adapter</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">layoutId</span> <span class="o">=</span> <span class="n">adapter</span><span class="o">.</span><span class="na">getLayoutId</span><span class="o">();</span>
+        <span class="n">layoutId</span> <span class="o">=</span> <span class="n">layoutId</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">adapter</span><span class="o">.</span><span class="na">getType</span><span class="o">()</span> <span class="o">:</span> <span class="n">layoutId</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">layoutId</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">View</span> <span class="n">itemView</span> <span class="o">=</span> <span class="nc">LayoutInflater</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">parent</span><span class="o">.</span><span class="na">getContext</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">inflate</span><span class="o">(</span><span class="n">layoutId</span><span class="o">,</span> <span class="n">parent</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nf">createViewHolder</span><span class="o">(</span><span class="n">itemView</span><span class="o">,</span> <span class="n">adapter</span><span class="o">.</span><span class="na">getHolderClass</span><span class="o">());</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"unchecked"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBindViewHolder</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">ViewHolder</span> <span class="n">holder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Item</span> <span class="n">item</span> <span class="o">=</span> <span class="n">getItem</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">holder</span> <span class="k">instanceof</span> <span class="nc">ItemViewHolder</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">ItemViewHolder</span> <span class="n">viewHolder</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ItemViewHolder</span><span class="o">)</span> <span class="n">holder</span><span class="o">;</span>
+            <span class="n">viewHolder</span><span class="o">.</span><span class="na">setItem</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+            <span class="n">viewHolder</span><span class="o">.</span><span class="na">onViewBound</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>使用 <code class="language-plaintext highlighter-rouge">AdapterDelegate</code> 实现唯一的 <code class="language-plaintext highlighter-rouge">Adapter</code>，将主要的代码委托给前者。</p><div class="language-java highlighter-rouge"><div class="code-header"> <span text-data=" Java "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Adapter</span> <span class="kd">extends</span> <span class="nc">RecyclerView</span><span class="o">.</span><span class="na">Adapter</span><span class="o">&lt;</span><span class="nc">ViewHolder</span><span class="o">&gt;</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">AdapterDelegate</span> <span class="n">delegate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AdapterDelegate</span><span class="o">();</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getItemViewType</span><span class="o">(</span><span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">delegate</span><span class="o">.</span><span class="na">getItemViewType</span><span class="o">(</span><span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@NonNull</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">ViewHolder</span> <span class="nf">onCreateViewHolder</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">ViewGroup</span> <span class="n">parent</span><span class="o">,</span> <span class="kt">int</span> <span class="n">viewType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">delegate</span><span class="o">.</span><span class="na">onCreateViewHolder</span><span class="o">(</span><span class="n">parent</span><span class="o">,</span> <span class="n">viewType</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">onBindViewHolder</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="nc">ViewHolder</span> <span class="n">holder</span><span class="o">,</span> <span class="kt">int</span> <span class="n">position</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">delegate</span><span class="o">.</span><span class="na">onBindViewHolder</span><span class="o">(</span><span class="n">holder</span><span class="o">,</span> <span class="n">position</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nc">ItemManager</span> <span class="nf">getManager</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">delegate</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="延伸">延伸</h2><p>在 Java 生态圈之外，有不少组合优于继承的实践。</p><h3 id="kotlin">Kotlin</h3><p>Kotlin 语言有 delegation 机制，可以方便开发者使用组合。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="kd">interface</span> <span class="nc">Base</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="nf">print</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">BaseImpl</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Base</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">print</span><span class="p">()</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Derived</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="nc">Base</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Base</span> <span class="k">by</span> <span class="n">b</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">b</span> <span class="p">=</span> <span class="nc">BaseImpl</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nc">Derived</span><span class="p">(</span><span class="n">b</span><span class="p">).</span><span class="nf">print</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h4 id="kotlin-版-instrumentedhashset">Kotlin 版 InstrumentedHashSet</h4><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">InstrumentedHashSet</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">set</span><span class="p">:</span> <span class="nc">MutableSet</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;)</span>
+    <span class="p">:</span> <span class="nc">MutableSet</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;</span> <span class="k">by</span> <span class="k">set</span> <span class="p">{</span>
+
+    <span class="k">private</span> <span class="kd">var</span> <span class="py">addCount</span> <span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">0</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">add</span><span class="p">(</span><span class="n">element</span><span class="p">:</span> <span class="nc">E</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="p">{</span>
+        <span class="n">addCount</span><span class="p">++</span>
+        <span class="k">return</span> <span class="k">set</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">addAll</span><span class="p">(</span><span class="n">elements</span><span class="p">:</span> <span class="nc">Collection</span><span class="p">&lt;</span><span class="nc">E</span><span class="p">&gt;):</span> <span class="nc">Boolean</span> <span class="p">{</span>
+        <span class="n">addCount</span> <span class="p">+=</span> <span class="n">elements</span><span class="p">.</span><span class="n">size</span>
+        <span class="k">return</span> <span class="k">set</span><span class="p">.</span><span class="nf">addAll</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h3 id="go">Go</h3><p>Go 语言没有继承机制，通过原生支持组合来实现代码的复用。以下分别是 <code class="language-plaintext highlighter-rouge">Reader</code> 和 <code class="language-plaintext highlighter-rouge">Writer</code> 接口定义。</p><div class="language-go highlighter-rouge"><div class="code-header"> <span text-data=" Go "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">type</span> <span class="n">Reader</span> <span class="k">interface</span> <span class="p">{</span>
+	<span class="n">Read</span><span class="p">(</span><span class="n">p</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">n</span> <span class="kt">int</span><span class="p">,</span> <span class="n">err</span> <span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Writer</span> <span class="k">interface</span> <span class="p">{</span>
+	<span class="n">Write</span><span class="p">(</span><span class="n">p</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="n">n</span> <span class="kt">int</span><span class="p">,</span> <span class="n">err</span> <span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>通过组合可以定义出具备读取和写入的新类型。</p><div class="language-go highlighter-rouge"><div class="code-header"> <span text-data=" Go "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">type</span> <span class="n">ReadWriter</span> <span class="k">interface</span> <span class="p">{</span>
+	<span class="n">Reader</span>
+	<span class="n">Writer</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>上述的例子是接口组合，也可以是实现组合。<em>(下面的例子来自 Go in Action 一书)</em></p><div class="language-go highlighter-rouge"><div class="code-header"> <span text-data=" Go "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre><td class="rouge-code"><pre><span class="k">type</span> <span class="n">user</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">name</span>  <span class="kt">string</span>
+	<span class="n">email</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="c">// notify implements a method that can be called via</span>
+<span class="c">// a value of type user.</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">u</span> <span class="o">*</span><span class="n">user</span><span class="p">)</span> <span class="n">notify</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Sending user email to %s&lt;%s&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+		<span class="n">u</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+		<span class="n">u</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c">// admin represents an admin user with privileges.</span>
+<span class="k">type</span> <span class="n">admin</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">user</span>  <span class="c">// Embedded Type</span>
+	<span class="n">level</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="c">// main is the entry point for the application.</span>
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c">// Create an admin user.</span>
+	<span class="n">ad</span> <span class="o">:=</span> <span class="n">admin</span><span class="p">{</span>
+		<span class="n">user</span><span class="o">:</span> <span class="n">user</span><span class="p">{</span>
+			<span class="n">name</span><span class="o">:</span>  <span class="s">"john smith"</span><span class="p">,</span>
+			<span class="n">email</span><span class="o">:</span> <span class="s">"john@yahoo.com"</span><span class="p">,</span>
+		<span class="p">},</span>
+		<span class="n">level</span><span class="o">:</span> <span class="s">"super"</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="c">// We can access the inner type's method directly.</span>
+	<span class="n">ad</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+
+	<span class="c">// The inner type's method is promoted.</span>
+	<span class="n">ad</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="推荐书籍">推荐书籍</h2><ul><li><a href="https://book.douban.com/subject/3360807/">Effective Java 中文版第2版</a><li><a href="https://book.douban.com/subject/4262627/">重构</a><li><a href="https://book.douban.com/subject/20393327/">重构与模式</a><li><a href="https://book.douban.com/subject/26854236/">软件设计重构</a></ul><h2 id="参考资料">参考资料</h2><ul><li><a href="https://book.douban.com/subject/3360807/">Effective Java 中文版第2版</a><li><a href="https://github.com/sockeqwe/AdapterDelegates">AdapterDelegates</a><li><a href="https://github.com/rome753/OneAdapter">OneAdapter</a></ul></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/%E7%BC%96%E7%A8%8B/'>编程</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/java/" class="post-tag no-text-decoration" >Java</a> <a href="/tags/go/" class="post-tag no-text-decoration" >Go</a> <a href="/tags/kotlin/" class="post-tag no-text-decoration" >Kotlin</a> <a href="/tags/%E7%BB%84%E5%90%88/" class="post-tag no-text-decoration" >组合</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=组合优于继承 - Belin Wu&url=https://belinwu.com/posts/composition-over-inheritance/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=组合优于继承 - Belin Wu&u=https://belinwu.com/posts/composition-over-inheritance/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=组合优于继承 - Belin Wu&url=https://belinwu.com/posts/composition-over-inheritance/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/learn-viewmodel/">初学Android架构组件之ViewModel</a><li><a href="/posts/kotlin-make-my-heart/">让我心动的Kotlin</a><li><a href="/posts/composition-over-inheritance/">组合优于继承</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/jetpack/">Jetpack</a> <a class="post-tag" href="/tags/java/">Java</a> <a class="post-tag" href="/tags/kotlin/">Kotlin</a> <a class="post-tag" href="/tags/viewmodel/">ViewModel</a> <a class="post-tag" href="/tags/git/">Git</a> <a class="post-tag" href="/tags/go/">Go</a> <a class="post-tag" href="/tags/lifecycle/">Lifecycle</a> <a class="post-tag" href="/tags/rxjava/">RxJava</a> <a class="post-tag" href="/tags/%E7%BB%84%E5%90%88/">组合</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/kotlin-make-my-heart/"><div class="card-body"> <span class="timeago small" >Oct 30, 2017<i class="unloaded">2017-10-30T23:16:00+00:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>让我心动的Kotlin</h3><div class="text-muted small"><p> Kotlin是一门务实、简洁和安全的语言，专注于互操作性。 注：本文基于Kotlin 1.3编写。 Hello world! fun main() { // 1 println("Hello world!") // 2 } 1 支持定义 top-level 函数，告别工具类。 fun关键字定义函数，参数声明格式是：name: Type。 main函数是程序执行的主入口...</p></div></div></a></div><div class="card"> <a href="/posts/learn-rxjava/"><div class="card-body"> <span class="timeago small" >Dec 3, 2017<i class="unloaded">2017-12-03T23:34:00+00:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>初学RxJava</h3><div class="text-muted small"><p> 什么是RxJava？ 这个名词包含两部分： Rx(是ReactiveX、Reactive Extensions、Reactive Programming的简称)：An API for asynchronous programming with observable streams. Java: Rx在JVM上实现。 在RxJava的GitHub里官方给出了这样的示意： ...</p></div></div></a></div><div class="card"> <a href="/posts/learn-git-flow/"><div class="card-body"> <span class="timeago small" >May 12, 2018<i class="unloaded">2018-05-12T16:23:00+00:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>初学Git工作流程</h3><div class="text-muted small"><p> (文中图片均来源于网络) Git Git已是代码版本管理的标配，其分布式、多分支功能让人印象深刻。 Git工作流程（Git Workflow） 当项目需要多人共同开发时，规范工作流程就变得越来越重要。合适的工作流程能让多人协同开发更加顺利和高效。 目前主流的Git工作流程有三种： Git Flow（版本发布） GitHub Flow（持续发布） GitLab...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/learn-lifecycle/" class="btn btn-outline-primary" prompt="Older"><p>初学Android架构组件之Lifecycle</p></a> <a href="/posts/learn-viewmodel/" class="btn btn-outline-primary" prompt="Newer"><p>初学Android架构组件之ViewModel</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://belinwu.com">Belin Wu</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/jetpack/">Jetpack</a> <a class="post-tag" href="/tags/java/">Java</a> <a class="post-tag" href="/tags/kotlin/">Kotlin</a> <a class="post-tag" href="/tags/viewmodel/">ViewModel</a> <a class="post-tag" href="/tags/git/">Git</a> <a class="post-tag" href="/tags/go/">Go</a> <a class="post-tag" href="/tags/lifecycle/">Lifecycle</a> <a class="post-tag" href="/tags/rxjava/">RxJava</a> <a class="post-tag" href="/tags/%E7%BB%84%E5%90%88/">组合</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script>

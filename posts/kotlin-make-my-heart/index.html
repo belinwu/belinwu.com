@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="day-prompt" content="days ago"><meta name="hour-prompt" content="hours ago"><meta name="minute-prompt" content="minutes ago"><meta name="justnow-prompt" content="just now"><meta name="generator" content="Jekyll v4.2.1" /><meta property="og:title" content="让我心动的Kotlin" /><meta property="og:locale" content="en" /><meta name="description" content="Kotlin是一门务实、简洁和安全的语言，专注于互操作性。" /><meta property="og:description" content="Kotlin是一门务实、简洁和安全的语言，专注于互操作性。" /><link rel="canonical" href="https://belinwu.com/posts/kotlin-make-my-heart/" /><meta property="og:url" content="https://belinwu.com/posts/kotlin-make-my-heart/" /><meta property="og:site_name" content="Belin Wu" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2017-10-30T23:16:00+00:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="让我心动的Kotlin" /><meta name="twitter:site" content="@belin_wu" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"description":"Kotlin是一门务实、简洁和安全的语言，专注于互操作性。","url":"https://belinwu.com/posts/kotlin-make-my-heart/","headline":"让我心动的Kotlin","@type":"BlogPosting","dateModified":"2021-10-18T11:22:46+00:00","datePublished":"2017-10-30T23:16:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://belinwu.com/posts/kotlin-make-my-heart/"},"@context":"https://schema.org"}</script><title>让我心动的Kotlin | Belin Wu</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="Belin Wu"><meta name="application-name" content="Belin Wu"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end" lang="en"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/avatar.jpeg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Belin Wu</a></div><div class="site-subtitle font-italic">Pragmatic Android Developer</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <a href="https://github.com/belinwu" aria-label="github" class="order-3" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/belin_wu" aria-label="twitter" class="order-4" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['belinwu','qq.com'].join('@')" aria-label="email" class="order-5" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" class="order-6" > <i class="fas fa-rss"></i> </a> <span class="icon-border order-2"></span> <span id="mode-toggle-wrapper" class="order-1"> <i class="mode-toggle fas fa-adjust"></i> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } var self = this; /* always follow the system prefers */ this.sysDarkPrefers.addListener(function() { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.updateMermaid(); }); } /* constructor() */ setDark() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_KEY); sessionStorage.removeItem(ModeToggle.MODE_KEY); } get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode == ModeToggle.DARK_MODE; } get isLightMode() { return this.mode == ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer) ) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } updateMermaid() { if (typeof mermaid !== "undefined") { let expectedTheme = (this.modeStatus === ModeToggle.DARK_MODE? "dark" : "default"); let config = { theme: expectedTheme }; /* re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $(".mermaid").each(function() { let svgCode = $(this).prev().children().html(); $(this).removeAttr("data-processed"); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, ".mermaid"); } } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.updateMermaid(); } /* flipMode() */ } /* ModeToggle */ let toggle = new ModeToggle(); $(".mode-toggle").click(function() { toggle.flipMode(); }); </script> </span></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>让我心动的Kotlin</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>让我心动的Kotlin</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="semi-bold"> Belin Wu </span> on <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Mon, Oct 30, 2017, 11:16 PM +0000" >Oct 30, 2017<i class="unloaded">2017-10-30T23:16:00+00:00</i> </span></div><div> <span> Updated <span class="timeago lastmod" data-toggle="tooltip" data-placement="bottom" title="Mon, Oct 18, 2021, 7:22 PM +0800" >Oct 18<i class="unloaded">2021-10-18T11:22:46+00:00</i> </span> </span> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="1359 words">7 min read</span></div></div><div class="post-content"><p><a href="http://kotlinlang.org/">Kotlin</a>是一门务实、简洁和安全的语言，专注于互操作性。</p><p><em>注：本文基于Kotlin 1.3编写。</em></p><h2 id="hello-world">Hello world!</h2><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 1</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello world!"</span><span class="p">)</span> <span class="c1">// 2</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p><em>1</em></p><p>支持定义 <em>top-level</em> 函数，告别工具类。</p><p><code class="language-plaintext highlighter-rouge">fun</code>关键字定义函数，参数声明格式是：<code class="language-plaintext highlighter-rouge">name: Type</code>。</p><p><code class="language-plaintext highlighter-rouge">main</code>函数是程序执行的主入口。</p><p><em>2</em></p><p><code class="language-plaintext highlighter-rouge">println</code>是内置<em>top-level</em>函数，打印消息到标准输出流并换行。</p><p>不需要<code class="language-plaintext highlighter-rouge">;</code>。</p><h2 id="文档注释支持markdown">文档注释支持Markdown</h2><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="cm">/**
+ * 这是`文档注释`，它支持 **Markdown**。
+ */</span>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"Hello world!"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="变量">变量</h2><p><code class="language-plaintext highlighter-rouge">var</code>定义可变变量，<code class="language-plaintext highlighter-rouge">val</code>定义只读变量，初始化后不能再次被赋值。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">27</span>
+    <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Belin Wu"</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="类型推导">类型推导</h2><p>可以不写类型，编译器会自动推导。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">age</span> <span class="p">=</span> <span class="mi">27</span> <span class="c1">// age is Int</span>
+    <span class="kd">val</span> <span class="py">name</span> <span class="p">=</span> <span class="s">"Belin Wu"</span> <span class="c1">// name is String</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="字符串模板">字符串模板</h2><p>字符串里可以直接嵌套变量或表达式。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">name</span> <span class="p">=</span> <span class="s">"Kotlin"</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"The length of $name is ${name.length}"</span><span class="p">)</span> <span class="c1">// The length of Kotlin is 6</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="原始字符串">原始字符串</h2><p>用三引号<code class="language-plaintext highlighter-rouge">"""</code>定义的字符串里可以包含任意字符，不需要转义。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">text</span> <span class="p">=</span> <span class="s">"""
+    for (c in "foo")
+        print(c)
+"""</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="没有new">没有<code class="language-plaintext highlighter-rouge">new</code></h2><p>直接调用构造函数就可以创建实例。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">version</span> <span class="p">=</span> <span class="nc">KotlinVersion</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="属性">属性</h2><p>不用定义<code class="language-plaintext highlighter-rouge">setter</code>和<code class="language-plaintext highlighter-rouge">getter</code>方法。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">User</span><span class="p">(</span><span class="kd">var</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">u</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span><span class="s">"Belin"</span><span class="p">)</span>
+    <span class="n">u</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">"Belin Wu"</span>
+    <span class="nf">println</span><span class="p">(</span><span class="s">"My name is ${u.name}"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="定义对象">定义对象</h2><p>对象声明将类的声明和实例创建结合了起来，一步到位。<code class="language-plaintext highlighter-rouge">Singleton</code>同时也是一个单例。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="kd">object</span> <span class="nc">Singleton</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">println</span><span class="p">(</span><span class="nc">Singleton</span><span class="p">)</span> <span class="c1">// Singleton@6e0be858</span>
+    <span class="nf">println</span><span class="p">(</span><span class="nc">Singleton</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="c1">// class Singleton</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="类型检查与智能转换">类型检查与智能转换</h2><p>判断对象是不是某个类型用<code class="language-plaintext highlighter-rouge">is</code>；判断对象不是某个类型用<code class="language-plaintext highlighter-rouge">!is</code></p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">obj</span><span class="p">:</span> <span class="nc">Any</span> <span class="p">=</span> <span class="s">"Kotlin"</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">obj</span> <span class="k">is</span> <span class="nc">String</span><span class="p">)</span> <span class="c1">// true</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">obj</span> <span class="p">!</span><span class="k">is</span> <span class="nc">String</span><span class="p">)</span> <span class="c1">// false</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>确定对象是期望的类型后就可以直接调用它的属性或成员函数，不需要强制类型转换。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">obj</span><span class="p">:</span> <span class="nc">Any</span> <span class="p">=</span> <span class="s">"Kotlin"</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">obj</span> <span class="k">is</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">println</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="类型别名">类型别名</h2><p>为已有类型定义别名有缩短类型名称、让名字更符合使用场景、简化范型或函数类型等好处。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="k">typealias</span> <span class="nc">Age</span> <span class="p">=</span> <span class="nc">Byte</span>
+<span class="k">typealias</span> <span class="nc">Hobby</span> <span class="p">=</span> <span class="nc">Set</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span>
+<span class="k">typealias</span> <span class="nc">Predicate</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="p">=</span> <span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">Boolean</span>
+
+<span class="kd">class</span> <span class="nc">Url</span> <span class="p">{</span>
+    <span class="k">inner</span> <span class="kd">class</span> <span class="nc">Builder</span>
+<span class="p">}</span>
+
+<span class="k">typealias</span> <span class="nc">UrlBuilder</span> <span class="p">=</span> <span class="nc">Url</span><span class="p">.</span><span class="nc">Builder</span>
+</pre></table></code></div></div><h2 id="可空类型">可空类型</h2><p>Kotlin 类型分为：可空类型、不可空类型。<code class="language-plaintext highlighter-rouge">null</code>只允许将赋值给可空类型，否则会出现编译错误。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">str</span><span class="p">:</span> <span class="nc">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="kd">val</span> <span class="py">error</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="k">null</span> <span class="c1">// compile error</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>在类型的后面加上<code class="language-plaintext highlighter-rouge">?</code>就是该类型对应的可空类型。</p><p>调用可空类型的属性或成员函数有一种安全的操作符：<code class="language-plaintext highlighter-rouge">?.</code>，当调用者是<code class="language-plaintext highlighter-rouge">null</code>时，调用结果也为<code class="language-plaintext highlighter-rouge">null</code>。当在多个可空类型上做级联调用时可以省去嵌套<code class="language-plaintext highlighter-rouge">if</code>判断，代码更加简洁。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">str</span><span class="p">:</span> <span class="nc">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="n">str</span><span class="o">?.</span><span class="n">length</span><span class="o">?.</span><span class="nf">toString</span><span class="p">()</span><span class="o">?.</span><span class="n">length</span> <span class="p">/</span> <span class="p">/</span> <span class="k">null</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="默认参数值">默认参数值</h2><p>有默认值的函数可以减少重载、困惑。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">joinToString</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;,</span> <span class="n">separator</span><span class="p">:</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">", "</span><span class="p">):</span> <span class="nc">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">.</span><span class="nf">joinToString</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">joinToString</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="nf">joinToString</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s">" "</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="数据类">数据类</h2><p>当使用<code class="language-plaintext highlighter-rouge">data class</code>定义数据类时，编译器会自动生成<code class="language-plaintext highlighter-rouge">toString()</code>，<code class="language-plaintext highlighter-rouge">equals()</code>，<code class="language-plaintext highlighter-rouge">hashCode()</code>，<code class="language-plaintext highlighter-rouge">copy()</code>等成员函数的字节码。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="kd">data class</span> <span class="nc">User</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">var</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">user</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span><span class="s">"Belin Wu"</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">equals</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="c1">// true</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">hashCode</span><span class="p">()</span> <span class="c1">// hash code</span>
+    <span class="n">user</span><span class="p">.</span><span class="nf">copy</span><span class="p">(</span><span class="n">age</span> <span class="p">=</span> <span class="mi">28</span><span class="p">)</span> <span class="c1">// copy the user to new user and modify the age property</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="nf">toString</span><span class="p">())</span> <span class="c1">// User(name=Belin Wu, age=27)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="解构声明">解构声明</h2><p>将对象解构可以一次性声明并初始化多个变量。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="kd">data class</span> <span class="nc">User</span><span class="p">(</span><span class="kd">var</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">,</span> <span class="kd">var</span> <span class="py">age</span><span class="p">:</span> <span class="nc">Int</span> <span class="p">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">u</span> <span class="p">=</span> <span class="nc">User</span><span class="p">(</span><span class="s">"Belin"</span><span class="p">)</span>
+    <span class="kd">val</span> <span class="p">(</span><span class="py">name</span><span class="p">,</span> <span class="py">age</span><span class="p">)</span> <span class="p">=</span> <span class="n">u</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"name is $name, age is $age"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="多返回值">多返回值</h2><p>使用解构声明可以实现返回多值的函数。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="p">(</span><span class="py">father</span><span class="p">,</span> <span class="py">mother</span><span class="p">)</span> <span class="p">=</span> <span class="nf">getParent</span><span class="p">()</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">father</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="nf">println</span><span class="p">(</span><span class="n">mother</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">getParent</span><span class="p">():</span> <span class="nc">Pair</span><span class="p">&lt;</span><span class="nc">Person</span><span class="p">,</span> <span class="nc">Person</span><span class="p">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Pair</span><span class="p">(</span><span class="nc">Person</span><span class="p">(</span><span class="s">"Father"</span><span class="p">),</span> <span class="nc">Person</span><span class="p">(</span><span class="s">"Mother"</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Person</span><span class="p">(</span><span class="kd">var</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">Pair&lt;A, B&gt;</code>是一个内置的数据类，它有<code class="language-plaintext highlighter-rouge">component1</code>和<code class="language-plaintext highlighter-rouge">component2</code>方法，Kotlin编译器会按顺序一一调用<code class="language-plaintext highlighter-rouge">componentN</code>方法并将结果分别赋值给<code class="language-plaintext highlighter-rouge">father</code>和<code class="language-plaintext highlighter-rouge">mother</code>变量。其中<code class="language-plaintext highlighter-rouge">component1</code>方法返回类声明的第一个属性，而<code class="language-plaintext highlighter-rouge">component2</code>方法返回第二个属性，依此类推。</p><p>举一反三，使用另一个内置的数据类<code class="language-plaintext highlighter-rouge">Triple&lt;A, B, C&gt;</code>就可以实现三个返回值的函数。</p><p>要一定是数据类吗？并不是，按照约定，在类中有定义N个<code class="language-plaintext highlighter-rouge">componentN</code>方法即可。</p><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">MyPair</span><span class="p">&lt;</span><span class="k">out</span> <span class="nc">A</span><span class="p">,</span> <span class="k">out</span> <span class="nc">B</span><span class="p">&gt;(</span><span class="kd">val</span> <span class="py">a</span><span class="p">:</span> <span class="nc">A</span><span class="p">,</span> <span class="kd">val</span> <span class="py">b</span><span class="p">:</span> <span class="nc">B</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component1</span><span class="p">()</span> <span class="p">=</span> <span class="n">a</span>
+
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component2</span><span class="p">()</span> <span class="p">=</span> <span class="n">b</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>不再需要中间变量，代码更简洁。</p><h2 id="delegation-机制">Delegation 机制</h2><div class="language-kotlin highlighter-rouge"><div class="code-header"> <span text-data=" Kotlin "><i class="fa-fw fas fa-code small"></i></span> <button aria-label="copy" title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="kd">interface</span> <span class="nc">Base</span> <span class="p">{</span>
+   <span class="k">fun</span> <span class="nf">print</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">BaseImpl</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Base</span> <span class="p">{</span>
+   <span class="k">override</span> <span class="k">fun</span> <span class="nf">print</span><span class="p">()</span> <span class="p">{</span> <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Derived</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="nc">Base</span><span class="p">)</span> <span class="p">:</span> <span class="nc">Base</span> <span class="k">by</span> <span class="n">b</span>
+
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kd">val</span> <span class="py">b</span> <span class="p">=</span> <span class="nc">BaseImpl</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+   <span class="nc">Derived</span><span class="p">(</span><span class="n">b</span><span class="p">).</span><span class="nf">print</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></table></code></div></div><h2 id="参考资料">参考资料</h2><ul><li><a href="https://www.manning.com/books/kotlin-in-action">Kotlin in Action</a><li><a href="http://kotlinlang.org/docs/reference/">Kotlin Reference</a></ul></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/%E7%BC%96%E7%A8%8B/'>编程</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/kotlin/" class="post-tag no-text-decoration" >Kotlin</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=让我心动的Kotlin - Belin Wu&url=https://belinwu.com/posts/kotlin-make-my-heart/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=让我心动的Kotlin - Belin Wu&u=https://belinwu.com/posts/kotlin-make-my-heart/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=让我心动的Kotlin - Belin Wu&url=https://belinwu.com/posts/kotlin-make-my-heart/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" title-succeed="Link copied successfully!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/learn-viewmodel/">初学Android架构组件之ViewModel</a><li><a href="/posts/kotlin-make-my-heart/">让我心动的Kotlin</a><li><a href="/posts/composition-over-inheritance/">组合优于继承</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/jetpack/">Jetpack</a> <a class="post-tag" href="/tags/java/">Java</a> <a class="post-tag" href="/tags/kotlin/">Kotlin</a> <a class="post-tag" href="/tags/viewmodel/">ViewModel</a> <a class="post-tag" href="/tags/git/">Git</a> <a class="post-tag" href="/tags/go/">Go</a> <a class="post-tag" href="/tags/lifecycle/">Lifecycle</a> <a class="post-tag" href="/tags/rxjava/">RxJava</a> <a class="post-tag" href="/tags/%E7%BB%84%E5%90%88/">组合</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/composition-over-inheritance/"><div class="card-body"> <span class="timeago small" >Jul 11, 2018<i class="unloaded">2018-07-11T09:51:00+00:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>组合优于继承</h3><div class="text-muted small"><p> 《Effective Java 中文版第2版》书中第16条中说到： 继承是实现代码复用的有力手段，但它并非永远是完成这项工作的的最佳工具。 继承有什么问题？ 继承打破了类的封装性，子类依赖于父类中特定功能的实现细节。 继承什么时候是安全的 在包的内部是用继承，不存在跨包继承。 专门为了扩展而设计，并且具备很好的文档说明。 一个例子 实现这样一个HashSet...</p></div></div></a></div><div class="card"> <a href="/posts/learn-rxjava/"><div class="card-body"> <span class="timeago small" >Dec 3, 2017<i class="unloaded">2017-12-03T23:34:00+00:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>初学RxJava</h3><div class="text-muted small"><p> 什么是RxJava？ 这个名词包含两部分： Rx(是ReactiveX、Reactive Extensions、Reactive Programming的简称)：An API for asynchronous programming with observable streams. Java: Rx在JVM上实现。 在RxJava的GitHub里官方给出了这样的示意： ...</p></div></div></a></div><div class="card"> <a href="/posts/learn-git-flow/"><div class="card-body"> <span class="timeago small" >May 12, 2018<i class="unloaded">2018-05-12T16:23:00+00:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>初学Git工作流程</h3><div class="text-muted small"><p> (文中图片均来源于网络) Git Git已是代码版本管理的标配，其分布式、多分支功能让人印象深刻。 Git工作流程（Git Workflow） 当项目需要多人共同开发时，规范工作流程就变得越来越重要。合适的工作流程能让多人协同开发更加顺利和高效。 目前主流的Git工作流程有三种： Git Flow（版本发布） GitHub Flow（持续发布） GitLab...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/android-image-scale-type/" class="btn btn-outline-primary" prompt="Older"><p>Android ImageView的scaleType属性</p></a> <a href="/posts/learn-rxjava/" class="btn btn-outline-primary" prompt="Newer"><p>初学RxJava</p></a></div></div></div></div><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://belinwu.com">Belin Wu</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/jetpack/">Jetpack</a> <a class="post-tag" href="/tags/java/">Java</a> <a class="post-tag" href="/tags/kotlin/">Kotlin</a> <a class="post-tag" href="/tags/viewmodel/">ViewModel</a> <a class="post-tag" href="/tags/git/">Git</a> <a class="post-tag" href="/tags/go/">Go</a> <a class="post-tag" href="/tags/lifecycle/">Lifecycle</a> <a class="post-tag" href="/tags/rxjava/">RxJava</a> <a class="post-tag" href="/tags/%E7%BB%84%E5%90%88/">组合</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/lozad/dist/lozad.min.js,npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.16.1,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script>
