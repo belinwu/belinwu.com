@@ -11,7 +11,7 @@ Principal Software Engineer at RingCentral
  
 ## 生涯
  
-- 2020.3&nbsp;~&nbsp;&nbsp;Today：RingCentral，(~Senior~/~Staff~) Principal Software Engineer
+- 2020.3&nbsp;~&nbsp;&nbsp;Today：RingCentral，(~~Senior~~/~~Staff~~) Principal Software Engineer
 - 2019.3&nbsp;~&nbsp;2020.2：美柚，Android 工程师
 - 2017.6&nbsp;~&nbsp;2019.2：美图，Android 工程师
 - 2015.4&nbsp;~&nbsp;2017.5：四三九九，Android 工程师
